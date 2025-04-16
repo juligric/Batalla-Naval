@@ -27,8 +27,48 @@ while barcosColocados < cantidadDeBarcos:
 
 
 
-
-
-# Mostramos el tablero
+print("\nTablero oculto:")
 for fila in tablero:
-    print(fila)
+    linea = []
+    for casillero in fila:
+        linea.append("~")  # Muestra todos los casilleros como agua
+    print(" ".join(linea))
+
+
+
+aciertos = 0
+fallos = 0
+
+while intentos > 0:
+    try:
+        fila_disparo = int(input("\nElegí la FILA (0 a {}): ".format(N - 1)))
+        col_disparo = int(input("Elegí la COLUMNA (0 a {}): ".format(N - 1)))
+
+        # Validar que las coordenadas sean válidas
+        if fila_disparo < 0 or fila_disparo >= N or col_disparo < 0 or col_disparo >= N:
+            print(" Coordenadas fuera del tablero. Probá de nuevo.\n")
+            continue
+
+        # Verificar si acertamos en un barco
+        if tablero[fila_disparo][col_disparo] == 1:
+            print(" ¡Acertaste un barco!\n")
+            tablero[fila_disparo][col_disparo] = "X"  # Marcamos un barco acertado
+            aciertos += 1
+        elif tablero[fila_disparo][col_disparo] == "X" or tablero[fila_disparo][col_disparo] == "-":
+            print(" Ya disparaste ahí. Probá otra posición.\n")
+            continue
+        else:
+            print(" Fallaste, no hay barco.\n")
+            tablero[fila_disparo][col_disparo] = "-"  # Marcamos un fallo
+            fallos += 1
+
+        intentos -= 1
+        print(f" Intentos restantes: {intentos}\n")
+
+        # Verificar si ganaste
+        if aciertos == cantidadDeBarcos:
+            print(" ¡Ganaste! Encontraste todos los barcos.\n")
+            break
+
+    except ValueError:
+        print(" Por favor, ingresá un número válido.\n")
