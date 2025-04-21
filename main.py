@@ -1,6 +1,6 @@
 
 #todo lo que esta por fuera de lo visto en clase lo obtuve ya que mi papa es progamdor y me ayudo a resolverlo 
-
+#todos los bonus estan en el link del repo 
 
 import random 
 N = 10  # Podés cambiar este número a lo que quieras
