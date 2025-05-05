@@ -2,10 +2,10 @@
 #todo lo que esta por fuera de lo visto en clase lo obtuve ya que mi papa es progamdor y me ayudo a resolverlo 
 
 
-def crear_tablero(N):
+def crear_tablero(N: int)
     return [[0 for _ in range(N)] for _ in range(N)]  # Crea el tablero
 
-def mostrar_tablero_oculto(tablero):  # Muestra los barcos, marcando los aciertos y fallos
+def mostrar_tablero_oculto(tablero: List[List[int]]):  # Muestra los barcos, marcando los aciertos y fallos
     for fila in tablero:
         linea = []
         for casillero in fila:
@@ -18,21 +18,21 @@ def mostrar_tablero_oculto(tablero):  # Muestra los barcos, marcando los acierto
         print(" ".join(linea))
 
 def contar_casillas_ocupadas(tablero):  # Cuenta cuántas casillas están ocupadas por barcos
-    total = 0
+    total:  int = 0
     for fila in tablero:
         total += fila.count(1)  # Cuenta los barcos en el tablero
     return total
 
-def colocar_barcos(tablero, jugador, cantidad_barcos, tamano_maximo_barco=3):
+def colocar_barcos(tablero: List[List[int]], jugador: str, cantidad_barcos: int, tamano_maximo_barco: int = 3):
     print(f"\n{jugador}, ingresá las posiciones de tus barcos (hasta {tamano_maximo_barco} casillas)")
-    colocados = 0
+    colocados: int = 0
     while colocados < cantidad_barcos:
         try:
-            fila = int(input(f"Ingresá la FILA del barco {colocados + 1} (0 a {N - 1}): "))
-            col = int(input(f"Ingresá la COLUMNA del barco {colocados + 1} (0 a {N - 1}): "))
-            tamano = int(input(f"Ingresá el tamaño del barco (1 a {tamano_maximo_barco}): "))
-            if tamano < 1 or tamano > tamano_maximo_barco:
-                print(f"El tamaño del barco debe ser entre 1 y {tamano_maximo_barco}.")
+            fila: int = int(input(f"Ingresá la FILA del barco {colocados + 1} (0 a {N - 1}): "))
+            col: int = int(input(f"Ingresá la COLUMNA del barco {colocados + 1} (0 a {N - 1}): "))
+            tamaño: int = int(input(f"Ingresá el tamaño del barco (1 a {tamaño_maximo_barco}): "))
+            if tamaño < 1 or tamano > tamaño_maximo_barco:
+                print(f"El tamaño del barco debe ser entre 1 y {tamaño_maximo_barco}.")
                 continue
             
             if fila < 0 or fila >= N or col < 0 or col >= N:
@@ -49,11 +49,11 @@ def colocar_barcos(tablero, jugador, cantidad_barcos, tamano_maximo_barco=3):
         except ValueError:
             print("Por favor, ingresá un número válido.\n")
 
-def turno_disparo(jugador, tablero_enemigo, aciertos, cantidad_casillas):
+def turno_disparo(jugador: str, tablero_enemigo:  List[List[int]], aciertos: int, cantidad_casillas: int    ):
     try:
         print(f"\n{jugador}, es tu turno de disparar.")
-        fila = int(input(f"Elegí la FILA (0 a {N - 1}): "))
-        col = int(input(f"Elegí la COLUMNA (0 a {N - 1}): "))
+        fila: int = int(input(f"Elegí la FILA (0 a {N - 1}): "))
+        col: int = int(input(f"Elegí la COLUMNA (0 a {N - 1}): "))
 
         if fila < 0 or fila >= N or col < 0 or col >= N:
             print("Coordenadas fuera del tablero. Probá de nuevo.")
@@ -81,22 +81,22 @@ def turno_disparo(jugador, tablero_enemigo, aciertos, cantidad_casillas):
 
 # --- INICIO DEL JUEGO ---
 N = 10
-cantidadDeBarcos = 5
+cantidadDeBarcos: int = 5
 
-tablero_j1 = crear_tablero(N)
-tablero_j2 = crear_tablero(N)
+tablero_j1: list[list[list]] = crear_tablero(N)
+tablero_j2:list[list[list]] = crear_tablero(N)
 
 colocar_barcos(tablero_j1, "Jugador 1", cantidadDeBarcos)
 print("\n" + "-" * 40)
 colocar_barcos(tablero_j2, "Jugador 2", cantidadDeBarcos)
 
-total_casillas_j1 = contar_casillas_ocupadas(tablero_j1)
-total_casillas_j2 = contar_casillas_ocupadas(tablero_j2)
+total_casillas_j1: int= contar_casillas_ocupadas(tablero_j1)
+total_casillas_j2: int = contar_casillas_ocupadas(tablero_j2)
 
-aciertos_j1 = 0
-aciertos_j2 = 0
+aciertos_j1: int = 0
+aciertos_j2: int = 0
 
-turno = 1  # 1 para jugador 1, 2 para jugador 2
+turno: int = 1  # 1 para jugador 1, 2 para jugador 2
 
 while True:
     print("\n" + "=" * 40)

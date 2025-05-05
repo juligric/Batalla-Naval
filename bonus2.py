@@ -1,19 +1,19 @@
-def crear_tablero(N):
+def crear_tablero(N: int):
     return [[0 for _ in range(N)] for _ in range(N)] #crea el tablero"
 
-def mostrar_tablero_oculto(tablero): #se fija si acrtemos o no y si  ya disparmos
+def mostrar_tablero_oculto(tablero:list[list[list]]): #se fija si acrtemos o no y si  ya disparmos
     for fila in tablero:
         linea = []
         for casillero in fila:
             if casillero == "X":
-                linea.append("X")
+                linea.append("X") #barco acertado
             elif casillero == "-":
-                linea.append("-")
+                linea.append("-") #tiro fallido
             else:
-                linea.append("~")
+                linea.append("~") #agua
         print(" ".join(linea))
 
-def colocar_barcos(tablero, jugador, cantidad):
+def colocar_barcos(tablero: List[List[int]], jugador: str, cantidad: int, N: in):
     print(f"\n{jugador}, ingresá las posiciones de tus barcos") 
     colocados = 0
     while colocados < cantidad: #si barco es menor a la cnatdiad de abrcos podemos seguir agregando, ademas aca hace la veriiacion para que se pueedan ubiar de manera correcta los abrcos 
@@ -32,7 +32,7 @@ def colocar_barcos(tablero, jugador, cantidad):
         except ValueError:
             print("Por favor, ingresá un número válido.\n")
 
-def turno_disparo(jugador, tablero_enemigo, aciertos, cantidad_barcos): #represnta el turno de cada jugador para dispara por turno y que sea alterando
+def turno_disparo(jugador: str, tablero_enemigo: List[List[int]], aciertos: int, cantidad_barcos: int, N: int) -> Tuple[int, bool]: #represnta el turno de cada jugador para dispara por turno y que sea alterando
     try:
         print(f"\n{jugador}, es tu turno de disparar.")
         fila = int(input(f"Elegí la FILA (0 a {N - 1}): "))
@@ -63,20 +63,20 @@ def turno_disparo(jugador, tablero_enemigo, aciertos, cantidad_barcos): #represn
 
 
 #incia el juego
-N = 10
-cantidadDeBarcos = 5
+N: int= 10
+cantidadDeBarcos: int = 5
 
-tablero_j1 = crear_tablero(N)
-tablero_j2 = crear_tablero(N)
+tablero_j1: List[List[int]] crear_tablero(N)
+tablero_j2: List[List[int]] crear_tablero(N)
 
 colocar_barcos(tablero_j1, "Jugador 1", cantidadDeBarcos)
 print("\n" + "-" * 40)
 colocar_barcos(tablero_j2, "Jugador 2", cantidadDeBarcos)
 
-aciertos_j1 = 0
-aciertos_j2 = 0
+aciertos_j1: int = 0
+aciertos_j2: int = 0
 
-turno = 1  # 1 para jugador 1, 2 para jugador 2
+turno: int = 1  # 1 para jugador 1, 2 para jugador 2
 
 while True:
     print("\n" + "=" * 40)
